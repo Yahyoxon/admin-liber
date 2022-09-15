@@ -18,7 +18,7 @@ const BookUpdate = () => {
     const bookForm = new FormData();
     bookForm.append("title", `${e.target.title?.value}`);
     bookForm.append("author", `${e.target.author?.value}`);
-    bookForm.append("thumbnail", file, `${file?.name}`);
+    file && bookForm.append("thumbnail", file, file?.name);
     bookForm.append("category", `${e.target.select?.value}`);
     bookForm.append("language", `${e.target.language?.value}`);
     bookForm.append("hardcover", `${e.target.hardcover?.value}`);
@@ -140,7 +140,6 @@ const BookUpdate = () => {
                       </label>
                       <input
                         type="number"
-                        min={1}
                         value="Электрон"
                         readOnly
                         name="booktype_1"
@@ -155,7 +154,7 @@ const BookUpdate = () => {
                         Нархи
                       </label>
                       <input
-                        defaultValue={parseFloat(detail?.types[0]?.price)}
+                        defaultValue={detail?.types[0]?.price}
                         type="text"
                         required
                         className="form-control"
@@ -172,7 +171,6 @@ const BookUpdate = () => {
                       </label>
                       <input
                         type="text"
-                        min={1}
                         value="Қоғоз"
                         readOnly
                         name="booktype_2"
@@ -187,9 +185,8 @@ const BookUpdate = () => {
                         Нархи
                       </label>
                       <input
-                        defaultValue={parseFloat(detail?.types[1]?.price)}
+                        defaultValue={detail?.types[1]?.price}
                         type="number"
-                        min={1}
                         required
                         className="form-control"
                         id={`bookprice_2`}
@@ -219,9 +216,8 @@ const BookUpdate = () => {
                         Нархи
                       </label>
                       <input
-                        defaultValue={parseFloat(detail?.types[2]?.price)}
+                        defaultValue={detail?.types[2]?.price}
                         type="number"
-                        min={1}
                         required
                         className="form-control"
                         id={`bookprice_3`}
@@ -264,7 +260,6 @@ const BookUpdate = () => {
                   <input
                     type="file"
                     accept="image/*"
-                    required
                     className="form-control"
                     id="thumbnail"
                     onChange={(e) => setFile(e.target.files[0])}

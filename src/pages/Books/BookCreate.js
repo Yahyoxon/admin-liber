@@ -104,7 +104,6 @@ const BookCreate = () => {
                   </label>
                   <input
                     type="number"
-                    min={1}
                     name="hardcover"
                     required
                     className="form-control"
@@ -115,7 +114,9 @@ const BookCreate = () => {
                     Нашр қилинган сана
                   </label>
                   <input
-                    type="date"
+                    type="number"
+                    min="1800"
+                    max="2050"
                     name="published_date"
                     required
                     className="form-control"
@@ -128,7 +129,6 @@ const BookCreate = () => {
                       </label>
                       <input
                         type="number"
-                        min={1}
                         value="Электрон"
                         readOnly
                         name="booktype_1"
@@ -143,6 +143,7 @@ const BookCreate = () => {
                         Нархи
                       </label>
                       <input
+                        defaultValue={0}
                         type="text"
                         required
                         className="form-control"
@@ -159,7 +160,6 @@ const BookCreate = () => {
                       </label>
                       <input
                         type="text"
-                        min={1}
                         value="Қоғоз"
                         readOnly
                         name="booktype_2"
@@ -174,8 +174,8 @@ const BookCreate = () => {
                         Нархи
                       </label>
                       <input
+                        defaultValue={0}
                         type="number"
-                        min={1}
                         required
                         className="form-control"
                         id={`bookprice_2`}
@@ -205,8 +205,8 @@ const BookCreate = () => {
                         Нархи
                       </label>
                       <input
+                        defaultValue={0}
                         type="number"
-                        min={1}
                         required
                         className="form-control"
                         id={`bookprice_3`}
