@@ -27,15 +27,19 @@ const CategoryTable = (props) => {
   const [types, setTypes] = useState([1]);
 
   const handleDelete = (category) => {
-    deleteCategory.mutate(
-      {
-        categoryId: category.guid,
-        visible: true,
-        thumbnail: category?.thumbnail,
-        title: category?.title,
-      },
-      { onSuccess: () => props.refetch() }
-    );
+    // eslint-disable-next-line no-restricted-globals
+    var result = confirm("Учиришга аминмисиз?");
+    if (result) {
+      deleteCategory.mutate(
+        {
+          categoryId: category.guid,
+          visible: true,
+          thumbnail: category?.thumbnail,
+          title: category?.title,
+        },
+        { onSuccess: () => props.refetch() }
+      );
+    }
   };
   // Toggle for Modal
   const toggle = () => setModal(!modal);
@@ -399,9 +403,10 @@ const CategoryTable = (props) => {
                                 color="warning"
                               >
                                 Таҳрирлаш
-                              </Button>{" "}
+                              </Button>
                               <Button
                                 onClick={() => handleDelete(item)}
+                                className="mx-3"
                                 color="danger"
                               >
                                 Ўчириш
