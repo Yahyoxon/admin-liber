@@ -43,6 +43,7 @@ const BookTable = (props) => {
     console.log(idRef.current);
     bookDetail.mutate({ bookId: guid });
   };
+
   const handleEditSubmit = (e) => {
     e.preventDefault();
     const bookForm = new FormData();
