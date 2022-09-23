@@ -22,6 +22,8 @@ const BookUpdate = () => {
     bookForm.append("category", `${e.target.select?.value}`);
     bookForm.append("language", `${e.target.language?.value}`);
     bookForm.append("hardcover", `${e.target.hardcover?.value}`);
+    bookForm.append("publisher", `${e.target.publisher?.value}`);
+    bookForm.append("isbn", `${e.target.isbn?.value}`);
     bookForm.append(
       "short_description_ru",
       `${e.target.short_description_ru?.value}`
@@ -57,7 +59,7 @@ const BookUpdate = () => {
                     Сарлавҳа
                   </label>
                   <input
-                    defaultValue={detail?.title}
+                    defaultValue={detail?.book_detail?.title}
                     type="text"
                     name="title"
                     required
@@ -69,7 +71,7 @@ const BookUpdate = () => {
                     Муаллиф
                   </label>
                   <input
-                    defaultValue={detail?.author}
+                    defaultValue={detail?.book_detail?.author}
                     type="text"
                     name="author"
                     required
@@ -81,7 +83,7 @@ const BookUpdate = () => {
                     Категория
                   </label>
                   <select
-                    defaultValue={detail?.category_guid}
+                    defaultValue={detail?.book_detail?.category?.guid}
                     required
                     name="category_guid"
                     className="form-control"
@@ -98,7 +100,7 @@ const BookUpdate = () => {
                     Тил
                   </label>
                   <input
-                    defaultValue={detail?.language}
+                    defaultValue={detail?.book_detail?.language}
                     type="text"
                     name="language"
                     required
@@ -107,23 +109,33 @@ const BookUpdate = () => {
                     placeholder="Тил"
                   />
                   <label className="mt-2" htmlFor="hardcover">
-                    Муқовали
+                    Сахифалар сони
                   </label>
                   <input
-                    defaultValue={detail?.hardcover}
+                    defaultValue={detail?.book_detail?.hardcover}
                     type="number"
                     min={1}
                     name="hardcover"
                     required
                     className="form-control"
                     id="hardcover"
-                    placeholder="Муқовали"
+                    placeholder="Сон киритинг"
+                  />
+                  <label htmlFor="publisher" className="mt-2">
+                    Нашриёт
+                  </label>
+                  <input
+                    defaultValue={detail?.book_detail?.publisher}
+                    className="form-control"
+                    id="publisher"
+                    name="publisher"
+                    placeholder="Хилол нашр"
                   />
                   <label className="mt-2" htmlFor="published_date">
                     Нашр қилинган сана
                   </label>
                   <input
-                    defaultValue={detail?.published_date}
+                    defaultValue={detail?.book_detail?.published_date}
                     type="number"
                     min="1800"
                     max="2050"
@@ -154,7 +166,7 @@ const BookUpdate = () => {
                         Нархи
                       </label>
                       <input
-                        defaultValue={detail?.types[0]?.price}
+                        defaultValue={detail?.book_detail?.types[0]?.price}
                         type="text"
                         required
                         className="form-control"
@@ -185,7 +197,7 @@ const BookUpdate = () => {
                         Нархи
                       </label>
                       <input
-                        defaultValue={detail?.types[1]?.price}
+                        defaultValue={detail?.book_detail?.types[1]?.price}
                         type="number"
                         required
                         className="form-control"
@@ -216,7 +228,7 @@ const BookUpdate = () => {
                         Нархи
                       </label>
                       <input
-                        defaultValue={detail?.types[2]?.price}
+                        defaultValue={detail?.book_detail?.types[2]?.price}
                         type="number"
                         required
                         className="form-control"
@@ -228,11 +240,23 @@ const BookUpdate = () => {
                   </div>
                 </Col>
                 <Col>
+                  <div>
+                    <label htmlFor="isbn" className="mt-3">
+                      ISBN
+                    </label>
+                    <input
+                      defaultValue={detail?.book_detail?.isbn}
+                      className="form-control"
+                      id="isbn"
+                      name="isbn"
+                      placeholder="9789943646223"
+                    />
+                  </div>
                   <label className="mt-2" htmlFor="short_description">
                     Қисқа тавсифи (RU)
                   </label>
                   <textarea
-                    defaultValue={detail?.short_description_ru}
+                    defaultValue={detail?.book_detail?.short_description_ru}
                     type="text"
                     name="short_description"
                     required
@@ -245,7 +269,7 @@ const BookUpdate = () => {
                     Қисқа тавсифи (UZ)
                   </label>
                   <textarea
-                    defaultValue={detail?.short_description_uz}
+                    defaultValue={detail?.book_detail?.short_description_uz}
                     type="text"
                     name="short_description"
                     required
@@ -266,7 +290,11 @@ const BookUpdate = () => {
                   />
 
                   <img
-                    src={file ? URL.createObjectURL(file) : detail?.thumbnail}
+                    src={
+                      file
+                        ? URL.createObjectURL(file)
+                        : detail?.book_detail?.thumbnail
+                    }
                     className="mt-3"
                     width="250px"
                     height="300px"

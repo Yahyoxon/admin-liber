@@ -20,6 +20,8 @@ const BookCreate = () => {
     bookForm.append("category", `${e.target.select?.value}`);
     bookForm.append("language", `${e.target.language?.value}`);
     bookForm.append("hardcover", `${e.target.hardcover?.value}`);
+    bookForm.append("publisher", `${e.target.publisher?.value}`);
+    bookForm.append("isbn", `${e.target.isbn?.value}`);
     bookForm.append(
       "short_description_ru",
       `${e.target.short_description_ru?.value}`
@@ -100,7 +102,7 @@ const BookCreate = () => {
                     placeholder="Тил"
                   />
                   <label className="mt-2" htmlFor="hardcover">
-                    Муқовали
+                    Сахифалар сони
                   </label>
                   <input
                     type="number"
@@ -108,7 +110,16 @@ const BookCreate = () => {
                     required
                     className="form-control"
                     id="hardcover"
-                    placeholder="Муқовали"
+                    placeholder="Сон киритинг"
+                  />
+                  <label htmlFor="publisher" className="mt-2">
+                    Нашриёт
+                  </label>
+                  <input
+                    className="form-control"
+                    id="publisher"
+                    name="publisher"
+                    placeholder="Хилол нашр"
                   />
                   <label className="mt-2" htmlFor="published_date">
                     Нашр қилинган сана
@@ -217,6 +228,18 @@ const BookCreate = () => {
                   </div>
                 </Col>
                 <Col>
+                  <div>
+                    <label htmlFor="isbn" className="mt-3">
+                      ISBN
+                    </label>
+                    <input
+                      className="form-control"
+                      id="isbn"
+                      name="isbn"
+                      placeholder="9789943646223"
+                    />
+                  </div>
+
                   <label className="mt-2" htmlFor="short_description">
                     Қисқа тавсифи (RU)
                   </label>
