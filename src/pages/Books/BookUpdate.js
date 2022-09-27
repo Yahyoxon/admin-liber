@@ -59,7 +59,7 @@ const BookUpdate = () => {
                     Сарлавҳа
                   </label>
                   <input
-                    defaultValue={detail?.book_detail?.title}
+                    defaultValue={detail?.title}
                     type="text"
                     name="title"
                     required
@@ -71,7 +71,7 @@ const BookUpdate = () => {
                     Муаллиф
                   </label>
                   <input
-                    defaultValue={detail?.book_detail?.author}
+                    defaultValue={detail?.author}
                     type="text"
                     name="author"
                     required
@@ -83,7 +83,7 @@ const BookUpdate = () => {
                     Категория
                   </label>
                   <select
-                    defaultValue={detail?.book_detail?.category?.guid}
+                    defaultValue={detail?.category?.guid}
                     required
                     name="category_guid"
                     className="form-control"
@@ -100,7 +100,7 @@ const BookUpdate = () => {
                     Тил
                   </label>
                   <input
-                    defaultValue={detail?.book_detail?.language}
+                    defaultValue={detail?.language}
                     type="text"
                     name="language"
                     required
@@ -112,7 +112,7 @@ const BookUpdate = () => {
                     Сахифалар сони
                   </label>
                   <input
-                    defaultValue={detail?.book_detail?.hardcover}
+                    defaultValue={detail?.hardcover}
                     type="number"
                     min={1}
                     name="hardcover"
@@ -125,7 +125,7 @@ const BookUpdate = () => {
                     Нашриёт
                   </label>
                   <input
-                    defaultValue={detail?.book_detail?.publisher}
+                    defaultValue={detail?.publisher}
                     className="form-control"
                     id="publisher"
                     name="publisher"
@@ -135,7 +135,7 @@ const BookUpdate = () => {
                     Нашр қилинган сана
                   </label>
                   <input
-                    defaultValue={detail?.book_detail?.published_date}
+                    defaultValue={detail?.published_date}
                     type="number"
                     min="1800"
                     max="2050"
@@ -166,7 +166,7 @@ const BookUpdate = () => {
                         Нархи
                       </label>
                       <input
-                        defaultValue={detail?.book_detail?.types[0]?.price}
+                        defaultValue={detail?.types[0]?.price}
                         type="text"
                         required
                         className="form-control"
@@ -197,7 +197,7 @@ const BookUpdate = () => {
                         Нархи
                       </label>
                       <input
-                        defaultValue={detail?.book_detail?.types[1]?.price}
+                        defaultValue={detail?.types[1]?.price}
                         type="number"
                         required
                         className="form-control"
@@ -228,7 +228,7 @@ const BookUpdate = () => {
                         Нархи
                       </label>
                       <input
-                        defaultValue={detail?.book_detail?.types[2]?.price}
+                        defaultValue={detail?.types[2]?.price}
                         type="number"
                         required
                         className="form-control"
@@ -245,7 +245,7 @@ const BookUpdate = () => {
                       ISBN
                     </label>
                     <input
-                      defaultValue={detail?.book_detail?.isbn}
+                      defaultValue={detail?.isbn}
                       className="form-control"
                       id="isbn"
                       name="isbn"
@@ -256,7 +256,7 @@ const BookUpdate = () => {
                     Қисқа тавсифи (RU)
                   </label>
                   <textarea
-                    defaultValue={detail?.book_detail?.short_description_ru}
+                    defaultValue={detail?.short_description_ru}
                     type="text"
                     name="short_description"
                     required
@@ -269,7 +269,7 @@ const BookUpdate = () => {
                     Қисқа тавсифи (UZ)
                   </label>
                   <textarea
-                    defaultValue={detail?.book_detail?.short_description_uz}
+                    defaultValue={detail?.short_description_uz}
                     type="text"
                     name="short_description"
                     required
@@ -290,11 +290,7 @@ const BookUpdate = () => {
                   />
 
                   <img
-                    src={
-                      file
-                        ? URL.createObjectURL(file)
-                        : detail?.book_detail?.thumbnail
-                    }
+                    src={file ? URL.createObjectURL(file) : detail?.thumbnail}
                     className="mt-3"
                     width="250px"
                     height="300px"
