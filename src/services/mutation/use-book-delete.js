@@ -8,3 +8,11 @@ export const useDeleteBook = () => {
       .then((res) => res.data)
   );
 };
+
+export const useDeleteBookFiles = () => {
+  return useMutation((data) =>
+    superRequest
+      .delete(`api/v1/book/content/${data.id}/delete/`)
+      .then((res) => res.data)
+  );
+};
