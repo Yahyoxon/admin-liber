@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-unused-vars */
 import React, { useRef } from "react";
-
 import { Row, Col, Card, CardBody, Table, Button } from "reactstrap";
 import { Link, useHistory } from "react-router-dom";
 import { useDeleteBook } from "../../services/mutation/use-book-delete";
+import { get } from "lodash";
 
 const BookTable = (props) => {
   const idRef = useRef(null);
@@ -55,7 +55,7 @@ const BookTable = (props) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {props.data.results.map((item, index) => {
+                      {get(props, "data.results", []).map((item, index) => {
                         return (
                           <tr key={item?.guid}>
                             <td
