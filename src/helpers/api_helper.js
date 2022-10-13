@@ -1,8 +1,8 @@
 import axios from "axios";
-import accessToken from "./jwt-token-access/accessToken";
+// import accessToken from "./jwt-token-access/accessToken";
 
 //pass new generated access token here
-const token = accessToken;
+const token = `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`;
 
 //apply base url for axios
 const API_URL = "";

@@ -31,11 +31,11 @@ const BookCreate = () => {
       `${e.target.short_description_uz?.value}`
     );
     bookForm.append("published_date", `${e.target.published_date?.value}`);
-    bookForm.append("types[0]types", "online");
+    bookForm.append("types[0]book_type", "online");
     bookForm.append("types[0]price", `${e.target.bookprice_1?.value}`);
-    bookForm.append("types[1]types", "paper");
+    bookForm.append("types[1]book_type", "paper");
     bookForm.append("types[1]price", `${e.target.bookprice_2?.value}`);
-    bookForm.append("types[2]types", "audio");
+    bookForm.append("types[2]book_type", "audio");
     bookForm.append("types[2]price", `${e.target.bookprice_3?.value}`);
     createBook.mutate(bookForm, {
       onSuccess: () => {

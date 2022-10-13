@@ -19,7 +19,8 @@ import logolight from "../../assets/images/logo-light.png";
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { username: "admin@liber.com", password: "123456" };
+    // this.state = { username: "admin@liber.com", password: "123456" };
+    this.state = { username: "", password: "" };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -94,8 +95,8 @@ class Login extends Component {
                                   type="text"
                                   className="form-control"
                                   id="username"
-                                  validate={{ email: true, required: true }}
-                                  placeholder="Электрон почта"
+                                  validate={{ required: true }}
+                                  placeholder="Username"
                                 />
                               </div>
 

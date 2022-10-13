@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 import React from "react";
-
+import Default from "../../assets/images/default.png";
 import { Row, Col, Card, CardBody, Table, Button } from "reactstrap";
 import { API_URL } from "../../configs/app.config";
 
@@ -8,7 +8,7 @@ const OrderTable = (props) => {
   const myHeaders = new Headers();
   myHeaders.append(
     "Authorization",
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY1ODQyMzM3LCJpYXQiOjE2NjQ1NDYzMzcsImp0aSI6IjE1MDYxNDBmNDdjZDQ2NzU5MDAxMmYwOWI5MzNlZjdlIiwidXNlcl9pZCI6Mjd9.rL-svw4fjDMQADxgQaJhGYVFhg2msZ00mXzCA8z6UEc"
+    `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`
   );
   myHeaders.append("Content-Type", "application/json");
   console.log(props);
@@ -23,10 +23,15 @@ const OrderTable = (props) => {
     body: raw,
   };
 
-  const handleChange = (guId) =>
-    fetch(`${API_URL}api/v1/order/customer/${guId}/complete/`, requestOptions)
-      .then((response) => response.text())
-      .catch((error) => console.log("error", error));
+  const handleChange = (guId) => {
+    // eslint-disable-next-line no-restricted-globals
+    var result = confirm("Аминмисиз?");
+    if (result) {
+      fetch(`${API_URL}api/v1/order/customer/${guId}/complete/`, requestOptions)
+        .then((response) => response.text())
+        .catch((error) => console.log("error", error));
+    }
+  };
 
   return (
     <React.Fragment>
@@ -66,20 +71,19 @@ const OrderTable = (props) => {
                               <td className="align-middle">
                                 <img
                                   width={"60px"}
-                                  alt={item?.book?.thumbnail?.substring(0, 10)}
-                                  src={item?.book?.thumbnail}
+                                  alt={item?.book_title?.substring(0, 10)}
+                                  src={item?.book_image || Default}
                                 />
                               </td>
                               <td className="align-middle">
-                                {item?.book?.title}
-                                {console.log(localStorage.getItem(item.guid))}
+                                {item?.book_title}
                               </td>
                               <td className="align-middle">
-                                {item?.total_price}
+                                {Number(item?.total_price).toLocaleString()}
                               </td>
                               <td className="align-middle">{item?.quantity}</td>
                               <td className="align-middle">
-                                {item?.book_type?.book_type}
+                                {item?.payment_type}
                               </td>
                               <td className="align-middle">
                                 {item?.payment_type}
@@ -100,6 +104,19 @@ const OrderTable = (props) => {
                                   }}
                                 >
                                   Тугатилди
+                                </Button>
+                                <Button
+                                  color="warning"
+                                  onClick={() => {
+                                    handleChange(item.guid);
+                                    window.localStorage.setItem(
+                                      item.guid,
+                                      item.guid
+                                    );
+                                    props.refetch();
+                                  }}
+                                >
+                                  Бекор қилиш
                                 </Button>
                               </td>
                             </tr>

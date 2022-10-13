@@ -241,7 +241,7 @@ const CategoryTable = (props) => {
               <label htmlFor="title">Сарлавҳа (RU)</label>
               <input
                 type="text"
-                defaultValue={props.data.results[catgryGuid]?.title_ru}
+                defaultValue={props?.data.results[catgryGuid]?.title_ru}
                 name="title_ru"
                 required
                 className="form-control"
@@ -253,7 +253,7 @@ const CategoryTable = (props) => {
               </label>
               <input
                 type="text"
-                defaultValue={props.data.results[catgryGuid]?.title_uz}
+                defaultValue={props?.data?.results[catgryGuid]?.title_uz}
                 name="title_uz"
                 required
                 className="form-control"
@@ -364,7 +364,7 @@ const CategoryTable = (props) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {props.data.results.map((item, index) => {
+                      {props?.data?.results?.map((item, index) => {
                         return (
                           <tr key={index}>
                             <td className="align-middle">

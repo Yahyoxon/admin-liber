@@ -33,11 +33,11 @@ const BookUpdate = () => {
       `${e.target.short_description_uz?.value}`
     );
     bookForm.append("published_date", `${e.target.published_date?.value}`);
-    bookForm.append("types[0]types", "online");
+    bookForm.append("types[0]book_type", "online");
     bookForm.append("types[0]price", `${e.target.bookprice_1?.value}`);
-    bookForm.append("types[1]types", "paper");
+    bookForm.append("types[1]book_type", "paper");
     bookForm.append("types[1]price", `${e.target.bookprice_2?.value}`);
-    bookForm.append("types[2]types", "audio");
+    bookForm.append("types[2]book_type", "audio");
     bookForm.append("types[2]price", `${e.target.bookprice_3?.value}`);
     bookForm.append("guid", `${id}`);
     bookUpdate.mutate(bookForm, {
@@ -82,6 +82,7 @@ const BookUpdate = () => {
                   <label className="mt-2" htmlFor="select">
                     Категория
                   </label>
+                  {console.log(detail?.category?.guid)}
                   <select
                     defaultValue={detail?.category?.guid}
                     required
@@ -90,6 +91,9 @@ const BookUpdate = () => {
                     id="select"
                     placeholder="Категорияни танланг"
                   >
+                    <option value={detail?.category?.guid}>
+                      {detail?.category?.title}
+                    </option>
                     {categoryList?.results?.map((item, index) => (
                       <option key={item?.guid} value={`${item?.guid}`}>
                         {item?.title}

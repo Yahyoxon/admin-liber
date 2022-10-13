@@ -3,13 +3,14 @@ import { Button, Col, Row } from "reactstrap";
 import { useQuery } from "react-query";
 import { API_URL } from "../../configs/app.config";
 import { Link } from "react-router-dom";
+import Default from "../../assets/images/default.png";
 
 const UserLists = () => {
   const [page, setPage] = useState(1);
   const myHeaders = new Headers();
   myHeaders.append(
     "Authorization",
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY1ODQyMzM3LCJpYXQiOjE2NjQ1NDYzMzcsImp0aSI6IjE1MDYxNDBmNDdjZDQ2NzU5MDAxMmYwOWI5MzNlZjdlIiwidXNlcl9pZCI6Mjd9.rL-svw4fjDMQADxgQaJhGYVFhg2msZ00mXzCA8z6UEc"
+    `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`
   );
 
   const requestOptions = {
@@ -27,7 +28,6 @@ const UserLists = () => {
     () => fetchProjects(page),
     { keepPreviousData: true }
   );
-
   return (
     <React.Fragment>
       <Row className="m-0 p-0">
@@ -42,13 +42,13 @@ const UserLists = () => {
                 Профиль фотосурати
               </Col>
               <Col md={3} className="text-center">
-                Исми
+                ФИО
               </Col>
-              <Col md={3} className="text-center">
+              {/* <Col md={3} className="text-center">
                 Фамилияси
-              </Col>
+              </Col> */}
               <Col md={3} className="text-center">
-                Телефон рақами
+                Телефон рақами/Email
               </Col>
             </Row>
             {data.results.map((item, index) => (
@@ -58,12 +58,12 @@ const UserLists = () => {
                     <img
                       width={25}
                       alt={item.profile_picture?.substring(0, 10)}
-                      src={item.profile_picture}
+                      src={item.profile_picture || Default}
                     />
                   </Col>
                   <Col md={3}>{item.first_name}</Col>
-                  <Col md={3}>{item.last_name}</Col>
-                  <Col md={3}>{item.phone_number}</Col>
+                  {/* <Col md={3}>{item.last_name}</Col> */}
+                  <Col md={3}>{item.username}</Col>
                 </Row>
               </Link>
             ))}
