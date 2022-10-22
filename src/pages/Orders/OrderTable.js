@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 import React from "react";
 import Default from "../../assets/images/default.png";
-import { Row, Col, Card, CardBody, Table, Button } from "reactstrap";
+import { Row, Col, Card, CardBody, Table, Button, Alert } from "reactstrap";
 import { API_URL } from "../../configs/app.config";
 
 const OrderTable = (props) => {
@@ -11,7 +11,7 @@ const OrderTable = (props) => {
     `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`
   );
   myHeaders.append("Content-Type", "application/json");
-  console.log(props);
+
   const raw = JSON.stringify({
     is_paid: true,
     is_complete: true,
@@ -28,6 +28,22 @@ const OrderTable = (props) => {
     var result = confirm("Аминмисиз?");
     if (result) {
       fetch(`${API_URL}api/v1/order/customer/${guId}/complete/`, requestOptions)
+        .then((response) => response.text())
+        .catch((error) => console.log("error", error));
+    }
+  };
+  const handleChangeCancelled = (guId) => {
+    // eslint-disable-next-line no-restricted-globals
+    var result = confirm("Буюртмани бекор қилмоқчимисиз?");
+    if (result) {
+      fetch(`${API_URL}api/v1/order/customer/${guId}/complete/`, {
+        method: "PUT",
+        headers: myHeaders,
+        body: JSON.stringify({
+          is_paid: true,
+          is_complete: false,
+        }),
+      })
         .then((response) => response.text())
         .catch((error) => console.log("error", error));
     }
@@ -57,9 +73,10 @@ const OrderTable = (props) => {
                         <th data-priority="1">Сарлавҳа</th>
                         <th data-priority="3">Умумий нарх</th>
                         <th data-priority="3">Миқдори</th>
-                        <th data-priority="3">Китоб тури</th>
                         <th data-priority="3">Тўлов тури</th>
                         <th data-priority="3">Тўлиқ исми</th>
+                        <th data-priority="3">Тел.рақами</th>
+                        {/* <th data-priority="3">Холати</th> */}
                         <th data-priority="3">Амаллар</th>
                       </tr>
                     </thead>
@@ -82,15 +99,19 @@ const OrderTable = (props) => {
                                 {Number(item?.total_price).toLocaleString()}
                               </td>
                               <td className="align-middle">{item?.quantity}</td>
-                              <td className="align-middle">
-                                {item?.payment_type}
-                              </td>
+
                               <td className="align-middle">
                                 {item?.payment_type}
                               </td>
                               <td className="align-middle">
                                 {item?.full_name}
                               </td>
+                              <td className="align-middle">
+                                {item?.phone_number}
+                              </td>
+                              {/* <td className="align-middle">
+                                <Alert color="primary">pending</Alert>
+                              </td> */}
                               <td className="align-middle">
                                 <Button
                                   color="success"
@@ -108,7 +129,7 @@ const OrderTable = (props) => {
                                 <Button
                                   color="warning"
                                   onClick={() => {
-                                    handleChange(item.guid);
+                                    handleChangeCancelled(item.guid);
                                     window.localStorage.setItem(
                                       item.guid,
                                       item.guid

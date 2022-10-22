@@ -49,7 +49,7 @@ const OrderList = () => {
           color="warning"
         >
           Олдинги саҳифа
-        </Button>{" "}
+        </Button>
         <Button
           onClick={() => {
             if (!isPreviousData && data.next) {
