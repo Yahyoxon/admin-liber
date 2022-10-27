@@ -1,8 +1,9 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 // import accessToken from "./jwt-token-access/accessToken";
 
 //pass new generated access token here
-const token = `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`;
+const token = `Bearer ${Cookies.get("user_token")}`;
 
 //apply base url for axios
 const API_URL = "";

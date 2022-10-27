@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { useQuery } from "react-query";
+import Cookies from "js-cookie";
 import { API_URL } from "../../configs/app.config";
 
 export const useCategoryList = () => {
@@ -8,7 +9,7 @@ export const useCategoryList = () => {
   const myHeaders = new Headers();
   myHeaders.append(
     "Authorization",
-    `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`
+    `Bearer ${Cookies.get("user_token")}`
   );
 
   const requestOptions = {

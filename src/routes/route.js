@@ -1,4 +1,5 @@
 import React from "react";
+import Cookies from 'js-cookie'
 import { Route, Redirect } from "react-router-dom";
 
 const AppRoute = ({
@@ -11,7 +12,7 @@ const AppRoute = ({
 		{...rest}
 		render={props => {
 
-			if (isAuthProtected && !localStorage.getItem("authUser")) {
+			if (isAuthProtected && !Cookies.get("user_token")) {
 				return (
 					<Redirect to={{ pathname: "/login", state: { from: props.location } }} />
 				);

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
+import Cookies from "js-cookie";
 import { Button, Col, Container, Row } from "reactstrap";
 import { API_URL } from "../../configs/app.config";
 import ResponsiveTables from "../Tables/ResponsiveTables";
@@ -9,7 +10,7 @@ const Transactions = () => {
   const myHeaders = new Headers();
   myHeaders.append(
     "Authorization",
-    `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`
+    `Bearer ${Cookies.get("user_token")}`
   );
 
   const requestOptions = {

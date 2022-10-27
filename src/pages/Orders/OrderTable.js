@@ -1,14 +1,15 @@
 /* eslint-disable array-callback-return */
 import React from "react";
+import Cookies from "js-cookie";
 import Default from "../../assets/images/default.png";
-import { Row, Col, Card, CardBody, Table, Button, Alert } from "reactstrap";
+import { Row, Col, Card, CardBody, Table, Button } from "reactstrap";
 import { API_URL } from "../../configs/app.config";
 
 const OrderTable = (props) => {
   const myHeaders = new Headers();
   myHeaders.append(
     "Authorization",
-    `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`
+    `Bearer ${Cookies.get("user_token")}`
   );
   myHeaders.append("Content-Type", "application/json");
 

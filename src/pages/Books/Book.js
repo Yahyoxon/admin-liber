@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Row } from "reactstrap";
 import { useQuery } from "react-query";
+import Cookies from "js-cookie";
 import { API_URL } from "../../configs/app.config";
 import BookTable from "./BookTable";
 
@@ -9,7 +10,7 @@ const Book = () => {
   const myHeaders = new Headers();
   myHeaders.append(
     "Authorization",
-    `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`
+    `Bearer ${Cookies.get("user_token")}`
   );
 
   const requestOptions = {

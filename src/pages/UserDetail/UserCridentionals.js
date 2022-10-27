@@ -1,4 +1,5 @@
 import { useQuery } from "react-query";
+import Cookies from "js-cookie";
 import { Col, Row } from "reactstrap";
 import { API_URL } from "../../configs/app.config";
 import StyledTable from "../Tables/Table";
@@ -12,7 +13,7 @@ const UserCridentionals = () => {
   const myHeaders = new Headers();
   myHeaders.append(
     "Authorization",
-    `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`
+    `Bearer ${Cookies.get("user_token")}`
   );
 
   const requestOptions = {
@@ -42,7 +43,7 @@ const UserCridentionals = () => {
         <>
           <Row className=" m-0">
             <Col md={4}>
-              Тўлиқ исми: {data.first_name} {data.last_name}
+              Тўлиқ исми: {data.first_name}
             </Col>
             <Col md={4}>
               Баланс:{" "}
@@ -50,6 +51,9 @@ const UserCridentionals = () => {
                 {" "}
                 {data.balance}{" "}
               </span>
+            </Col>
+            <Col md={4}>
+              Username: {data.username} 
             </Col>
           </Row>
           <div className="text-center my-3">

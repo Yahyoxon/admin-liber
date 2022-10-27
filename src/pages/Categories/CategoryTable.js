@@ -28,7 +28,7 @@ const CategoryTable = (props) => {
 
   const handleDelete = (category) => {
     // eslint-disable-next-line no-restricted-globals
-    var result = confirm("Учиришга аминмисиз?");
+    var result = confirm("Ўчиришга аминмисиз?");
     if (result) {
       deleteCategory.mutate(
         {
@@ -37,7 +37,12 @@ const CategoryTable = (props) => {
           thumbnail: category?.thumbnail,
           title: category?.title,
         },
-        { onSuccess: () => props.refetch() }
+        {
+          onSuccess: () => props.refetch(),
+          onError: () => {
+            alert("Нимадир хато!");
+          },
+        }
       );
     }
   };
@@ -62,11 +67,11 @@ const CategoryTable = (props) => {
     for (let item in types) {
       categoryForm.append(
         `category_types[${Number(item)}]days`,
-        `${e.target[Number(item) + 3]?.value}`
+        `${e.target[Number(item) * 2 + 3]?.value}`
       );
       categoryForm.append(
         `category_types[${Number(item)}]price`,
-        `${e.target[Number(item) + 4]?.value}`
+        `${e.target[Number(item) * 2 + 4]?.value}`
       );
     }
     updateCategory.mutate(categoryForm, {
@@ -91,11 +96,11 @@ const CategoryTable = (props) => {
     for (let item in types) {
       categoryForm.append(
         `category_types[${Number(item)}]days`,
-        `${e.target[Number(item) + 4]?.value}`
+        `${e.target[Number(item) * 2 + 3]?.value}`
       );
       categoryForm.append(
         `category_types[${Number(item)}]price`,
-        `${e.target[Number(item) + 5]?.value}`
+        `${e.target[Number(item) * 2 + 4]?.value}`
       );
     }
     createCategory.mutate(categoryForm, {
@@ -260,14 +265,11 @@ const CategoryTable = (props) => {
                 id="title"
                 placeholder="Сарлавҳа"
               />
-
-              {console.log(props?.data?.results[catgryGuid])}
               <label htmlFor="file" className="mt-3">
                 Кичик расм
               </label>
               <input
                 type="file"
-                required
                 accept="image/*"
                 className="form-control"
                 id="file"

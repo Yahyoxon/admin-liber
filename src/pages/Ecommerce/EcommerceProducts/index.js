@@ -449,10 +449,10 @@ class EcommerceProducts extends Component {
                       </div>
                     </CardBody>
 
-                    <CardBody class="border-top">
+                    <CardBody className="border-top">
                       <div>
-                        <h5 class="font-size-14 mb-0">
-                          <Link to="#" class="text-dark d-block" data-bs-toggle="collapse" onClick={this.filtersizetoggle}>Size <i class="mdi mdi-minus float-end accor-plus-icon"></i></Link></h5>
+                        <h5 className="font-size-14 mb-0">
+                          <Link to="#" className="text-dark d-block" data-bs-toggle="collapse" onClick={this.filtersizetoggle}>Size <i className="mdi mdi-minus float-end accor-plus-icon"></i></Link></h5>
 
                         <Collapse
                           isOpen={this.isFilterProductSizeOpen}
@@ -460,8 +460,8 @@ class EcommerceProducts extends Component {
                           data-bs-toggle="collapse"
                         >
 
-                          <div class="mt-4">
-                            <div class="form-check mt-2">
+                          <div className="mt-4">
+                            <div className="form-check mt-2">
                               <Input
                                 type="checkbox"
                                 value="x-large"
@@ -472,7 +472,7 @@ class EcommerceProducts extends Component {
                                 X-Large
                               </Label>
                             </div>
-                            <div class="form-check mt-2">
+                            <div className="form-check mt-2">
                               <Input
                                 type="checkbox"
                                 value="x-large"
@@ -483,7 +483,7 @@ class EcommerceProducts extends Component {
                                 Large
                               </Label>
                             </div>
-                            <div class="form-check mt-2">
+                            <div className="form-check mt-2">
                               <Input
                                 type="checkbox"
                                 value="x-large"
@@ -494,7 +494,7 @@ class EcommerceProducts extends Component {
                                 Medium
                               </Label>
                             </div>
-                            <div class="form-check mt-2">
+                            <div className="form-check mt-2">
                               <Input
                                 type="checkbox"
                                 value="x-large"
@@ -630,10 +630,10 @@ class EcommerceProducts extends Component {
                         <Col md="6">
                           <div>
                             <h5>Clothes & Accessories</h5>
-                            <ol class="breadcrumb p-0 bg-transparent mb-2">
-                              <li class="breadcrumb-item"><Link to="#">Fashion</Link></li>
-                              <li class="breadcrumb-item"><Link to="#">Clothing</Link></li>
-                              <li class="breadcrumb-item active">T-shirts</li>
+                            <ol className="breadcrumb p-0 bg-transparent mb-2">
+                              <li className="breadcrumb-item"><Link to="#">Fashion</Link></li>
+                              <li className="breadcrumb-item"><Link to="#">Clothing</Link></li>
+                              <li className="breadcrumb-item active">T-shirts</li>
                             </ol>
                           </div>
                         </Col>
@@ -647,18 +647,18 @@ class EcommerceProducts extends Component {
                                   className="form-control rounded"
                                   placeholder="Search..."
                                 />
-                                <i class="mdi mdi-magnify search-icon"></i>
+                                <i className="mdi mdi-magnify search-icon"></i>
                               </div>
                             </div>
                           </div>
                         </Col>
                       </Row>
 
-                      <ul class="list-inline my-3 ecommerce-sortby-list">
-                        <li class="list-inline-item"><span class="fw-medium font-family-secondary">Sort by:</span></li>
-                        <li class="list-inline-item active"><Link to="#">Popularity</Link></li>
-                        <li class="list-inline-item"><Link to="#">Newest</Link></li>
-                        <li class="list-inline-item"><Link to="#">Discount</Link></li>
+                      <ul className="list-inline my-3 ecommerce-sortby-list">
+                        <li className="list-inline-item"><span className="fw-medium font-family-secondary">Sort by:</span></li>
+                        <li className="list-inline-item active"><Link to="#">Popularity</Link></li>
+                        <li className="list-inline-item"><Link to="#">Newest</Link></li>
+                        <li className="list-inline-item"><Link to="#">Discount</Link></li>
                       </ul>
 
                       <Row className="g-0">
@@ -684,9 +684,9 @@ class EcommerceProducts extends Component {
                                       {`-${product.offer}%`}
                                     </div>
                                   ) : null}
-                                  <div class="product-like">
+                                  <div className="product-like">
                                     <Link to="#">
-                                      <i class={product.islike ? 'mdi mdi-heart text-danger' : 'mdi mdi-heart-outline'}></i>
+                                      <i className={product.islike ? 'mdi mdi-heart text-danger' : 'mdi mdi-heart-outline'}></i>
                                     </Link>
                                   </div>
                                   <img
@@ -701,7 +701,7 @@ class EcommerceProducts extends Component {
                                   <p className="text-muted font-size-13">
                                     {product.extrades}
                                   </p>
-                                  <h5 class="font-size-15">
+                                  <h5 className="font-size-15">
                                     <Link
                                       to={
                                         "/ecommerce-product-detail/" + product.id

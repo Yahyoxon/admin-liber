@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import Cookies from "js-cookie";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import {} from "../../store/actions";
@@ -16,7 +16,7 @@ class Sidebar extends Component {
     this.state = {};
   }
   logout() {
-    localStorage.clear();
+    Cookies.remove("user_token")
     window.location.reload();
   }
   render() {

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Col, Row } from "reactstrap";
 import { useQuery } from "react-query";
+import Cookies from "js-cookie";
 import { API_URL } from "../../configs/app.config";
 import { Link } from "react-router-dom";
 import Default from "../../assets/images/default.png";
@@ -10,7 +11,7 @@ const UserLists = () => {
   const myHeaders = new Headers();
   myHeaders.append(
     "Authorization",
-    `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`
+    `Bearer ${Cookies.get("user_token")}`
   );
 
   const requestOptions = {

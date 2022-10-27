@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import Cookies from 'js-cookie'
 import { Row, Col, Input, Button, Alert, Container, Label } from "reactstrap";
 
 // Redux
@@ -20,12 +20,49 @@ class Login extends Component {
   constructor(props) {
     super(props);
     // this.state = { username: "admin@liber.com", password: "123456" };
-    this.state = { username: "", password: "" };
+    this.state = { error: "", loading: false };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
-  handleSubmit(event, values) {
-    this.props.checkLogin(values, this.props.history);
+  async handleSubmit(event, values) {
+    this.setState({
+      loading: true,
+    });
+    if (values?.username === "admin") {
+      try {
+        const response = await fetch(
+          "https://api-liber.uz/api/v1/account/user-login/",
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values),
+          }
+        );
+        if (response?.status === 200) {
+          const user = await response.json();
+          console.log(user);
+          Cookies.set("user_token", user.access,{ expires: 2 });
+          this.props.history.push("/dashboard");
+        } else {
+          this.setState({
+            error:
+              "Фойдаланувчи номи ва пароль яроқсиз. Илтимос, тўғри фойдаланувчи номи ва паролни киритинг",
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      this.setState({
+        error:
+          "Фойдаланувчи номи ва пароль яроқсиз. Илтимос, тўғри фойдаланувчи номи ва паролни киритинг",
+      });
+    }
+    this.setState({
+      loading: false,
+    });
   }
 
   componentDidMount() {
@@ -51,18 +88,18 @@ class Login extends Component {
                         <div>
                           <div className="text-center">
                             <div>
-                              <Link to="/" class="">
+                              <Link to="/" className="">
                                 <img
                                   src={logodark}
                                   alt=""
                                   height="40"
-                                  class="auth-logo logo-dark mx-auto"
+                                  className="auth-logo logo-dark mx-auto"
                                 />
                                 <img
                                   src={logolight}
                                   alt=""
                                   height="40"
-                                  class="auth-logo logo-light mx-auto"
+                                  className="auth-logo logo-light mx-auto"
                                 />
                               </Link>
                             </div>
@@ -75,11 +112,9 @@ class Login extends Component {
                             </p>
                           </div>
 
-                          {this.props.loginError && this.props.loginError ? (
-                            <Alert color="danger">
-                              {this.props.loginError}
-                            </Alert>
-                          ) : null}
+                          {this.state.error.length > 0 && (
+                            <Alert color="danger">{this.state.error}</Alert>
+                          )}
 
                           <div className="p-2 mt-5">
                             <AvForm
@@ -91,7 +126,7 @@ class Login extends Component {
                                 <Label htmlFor="username">Электрон почта</Label>
                                 <AvField
                                   name="username"
-                                  value={this.state.username}
+                                  // value={this.state.username}
                                   type="text"
                                   className="form-control"
                                   id="username"
@@ -105,7 +140,7 @@ class Login extends Component {
                                 <Label htmlFor="userpassword">Пароль</Label>
                                 <AvField
                                   name="password"
-                                  value={this.state.password}
+                                  // value={this.state.password}
                                   type="password"
                                   className="form-control"
                                   id="userpassword"
@@ -132,8 +167,9 @@ class Login extends Component {
                                   color="primary"
                                   className="w-md waves-effect waves-light"
                                   type="submit"
+                                  disabled={this.state?.loading}
                                 >
-                                  Кириш
+                                  {this.state?.loading ? "#####" : "Кириш"}
                                 </Button>
                               </div>
                             </AvForm>

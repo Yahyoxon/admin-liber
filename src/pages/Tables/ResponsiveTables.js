@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Default from "../../assets/images/default.png";
 import { Row, Col, Card, CardBody, Table } from "reactstrap";
+import { Link } from "react-router-dom";
 
 class ResponsiveTables extends Component {
   constructor(props) {
@@ -67,7 +68,11 @@ class ResponsiveTables extends Component {
                                   src={item?.owner?.profile_picture || Default}
                                 />
                               </th>
-                              <td>{item?.owner?.first_name}</td>
+                              <td>
+                                <Link to={`/user/:${item?.owner?.guid}`}>
+                                  {item?.owner?.first_name}
+                                </Link>
+                              </td>
                               <td>
                                 {item?.is_paid ? (
                                   <span className="p-1 text-light rounded bg-success">

@@ -17,9 +17,10 @@ const BookCreate = () => {
     bookForm.append("title", `${e.target.title?.value}`);
     bookForm.append("author", `${e.target.author?.value}`);
     bookForm.append("thumbnail", file, `${file?.name}`);
-    bookForm.append("category", `${e.target.select?.value}`);
+    bookForm.append("category", `${e.target.category_guid?.value}`);
     bookForm.append("language", `${e.target.language?.value}`);
     bookForm.append("hardcover", `${e.target.hardcover?.value}`);
+    bookForm.append("page_count", `${e.target.page_count?.value}`);
     bookForm.append("publisher", `${e.target.publisher?.value}`);
     bookForm.append("isbn", `${e.target.isbn?.value}`);
     bookForm.append(
@@ -74,14 +75,14 @@ const BookCreate = () => {
                     id="author"
                     placeholder="Муаллиф"
                   />
-                  <label className="mt-2" htmlFor="select">
+                  <label className="mt-2" htmlFor="category_guid">
                     Категория
                   </label>
                   <select
                     required
                     name="category_guid"
                     className="form-control"
-                    id="select"
+                    id="category_guid"
                     placeholder="Категорияни танланг"
                   >
                     {categoryList?.results?.map((item, index) => (
@@ -101,17 +102,34 @@ const BookCreate = () => {
                     id="language"
                     placeholder="Тил"
                   />
-                  <label className="mt-2" htmlFor="hardcover">
+                  <label className="mt-2" htmlFor="page_count">
                     Сахифалар сони
                   </label>
                   <input
                     type="number"
-                    name="hardcover"
+                    name="page_count"
                     required
                     className="form-control"
-                    id="hardcover"
+                    id="page_count"
                     placeholder="Сон киритинг"
                   />
+                  <label className="mt-2" htmlFor="hardcover">
+                    Муқоваси
+                  </label>
+                  <select
+                    required
+                    name="hardcover"
+                    className="form-control"
+                    id="hardcover"
+                    placeholder="Танланг"
+                  >
+                    <option value="қаттиқ">
+                      Қаттиқ
+                    </option>
+                    <option value="юмшоқ">
+                      Юмшоқ
+                    </option>
+                  </select>
                   <label htmlFor="publisher" className="mt-2">
                     Нашриёт
                   </label>
